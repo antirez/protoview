@@ -26,15 +26,25 @@ jobs:
             sdk-index-url: https://up.unleashedflip.com/directory.json
             sdk-channel: release
     name: 'fap ufbt build for ${{ matrix.name }}'
+    env:
+      DEV_SDK: ${{ matrix.sdk-channel == 'dev' }}
     steps:
+      - name: Set Swap Space
+        uses: pierotofy/set-swap-space@master
+        with:
+          swap-size-gb: 10
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Build with ufbt
-        uses: flipperdevices/flipperzero-ufbt-action@v0.1.2
+      - name: Set UFBT_ARGS
+        run: |
+          echo "UFBT_ARGS=$(if [[ '${{ env.DEV_SDK }}' == 'true' ]]; then echo '--extra-define=DEV_SDK'; else echo '-s'; fi)" >> $GITHUB_ENV
+      - name: Build with ufbt (actual)
+        uses: flipperdevices/flipperzero-ufbt-action@v0.1.3
         id: build-app
         with:
           sdk-channel: ${{ matrix.sdk-channel }}
           sdk-index-url: ${{ matrix.sdk-index-url }}
+          ufbt-args: ${{ env.UFBT_ARGS }}
       - name: Upload app artifacts
         uses: actions/upload-artifact@v3
         with:

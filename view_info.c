@@ -3,7 +3,8 @@
 
 #include "app.h"
 #include <gui/view.h>
-#include <lib/toolbox/random_name.h>
+#include <toolbox/name_generator.h>
+
 
 /* This view has subviews accessible navigating up/down. This
  * enumaration is used to track the currently active subview. */
@@ -167,7 +168,7 @@ void str_replace(char* buf, char c1, char c2) {
 /* Set a random filename the user can edit. */
 void set_signal_random_filename(ProtoViewApp* app, char* buf, size_t buflen) {
     char suffix[6];
-    set_random_name(suffix, sizeof(suffix));
+    name_generator_make_random(suffix, sizeof(suffix));
     snprintf(buf, buflen, "%.10s-%s-%d", app->msg_info->decoder->name, suffix, rand() % 1000);
     str_replace(buf, ' ', '_');
     str_replace(buf, '-', '_');
