@@ -22,6 +22,7 @@ extern ProtoViewDecoder CitroenTPMSDecoder;
 extern ProtoViewDecoder FordTPMSDecoder;
 extern ProtoViewDecoder KeeloqDecoder;
 extern ProtoViewDecoder ProtoViewChatDecoder;
+extern ProtoViewDecoder ScmPlusDecoder;
 extern ProtoViewDecoder UnknownDecoder;
 
 ProtoViewDecoder* Decoders[] = {
@@ -35,6 +36,7 @@ ProtoViewDecoder* Decoders[] = {
     &FordTPMSDecoder, /* Ford TPMS. */
     &KeeloqDecoder, /* Keeloq remote. */
     &ProtoViewChatDecoder, /* Protoview simple text messages. */
+    &ScmPlusDecoder, /* SCM+ ERT */
 
     /* Warning: the following decoder must stay at the end of the
      * list. Otherwise would detect most signals and prevent the actaul
