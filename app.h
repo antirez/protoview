@@ -373,5 +373,7 @@ void field_set_from_field(ProtoViewField* dst, ProtoViewField* src);
 
 /* crc.c */
 uint8_t crc8(const uint8_t* data, size_t len, uint8_t init, uint8_t poly);
+uint8_t crc16(const uint8_t* data, size_t len, uint16_t init, uint16_t poly);
+
 uint8_t sum_bytes(const uint8_t* data, size_t len, uint8_t init);
 uint8_t xor_bytes(const uint8_t* data, size_t len, uint8_t init);
