@@ -1,3 +1,8 @@
+## forked features
+- github actions matrix builds against OFW and CFW every week on Sunday
+- SCM+ decoder/encoder
+
+# Protoview
 ProtoView is a digital signal detection, visualization, editing and reply tool for the [Flipper Zero](https://flipperzero.one/). The Flipper default application, called Subghz, is able to identify certain RF protocols, but when the exact protocol is not implemented (and there are many undocumented and unimplemented ones, such as the ones in use in TPMS systems, car keys and many others), the curious person is left wondering what the device is sending at all. Using ProtoView she or he can visualize the high and low pulses like in the example image below (showing a TPMS signal produced by a Renault tire):
 
 ![ProtoView screenshot raw signal](/images/protoview_1.jpg)
