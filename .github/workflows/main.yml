@@ -5,10 +5,11 @@ on:
       - main
   pull_request:
     branches:
-      - '**'
-  schedule: 
+      - "**"
+  schedule:
     # do a build every Sunday to keep up with SDK changes
     - cron: "0 0 * * 0"
+  workflow_dispatch:
 jobs:
   ufbt-build-action:
     runs-on: ubuntu-latest
@@ -25,7 +26,7 @@ jobs:
           - name: Unleashed Release
             sdk-index-url: https://up.unleashedflip.com/directory.json
             sdk-channel: release
-    name: 'fap ufbt build for ${{ matrix.name }}'
+    name: "fap ufbt build for ${{ matrix.name }}"
     env:
       DEV_SDK: ${{ matrix.sdk-channel == 'dev' }}
     steps:
@@ -34,7 +35,11 @@ jobs:
         with:
           swap-size-gb: 10
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
       - name: Set UFBT_ARGS
         run: |
           echo "UFBT_ARGS=$(if [[ '${{ env.DEV_SDK }}' == 'true' ]]; then echo '--extra-define=DEV_SDK'; else echo '-s'; fi)" >> $GITHUB_ENV
@@ -46,7 +51,7 @@ jobs:
           sdk-index-url: ${{ matrix.sdk-index-url }}
           ufbt-args: ${{ env.UFBT_ARGS }}
       - name: Upload app artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ github.event.repository.name }}-${{ steps.build-app.outputs.suffix }}-build
           path: ${{ steps.build-app.outputs.fap-artifacts }}
