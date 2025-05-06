@@ -153,7 +153,7 @@ cd ~/flipperZero/official/
 git clone --recursive  https://github.com/flipperdevices/flipperzero-firmware.git  ./
 ./fbt
 ```
-* Copy this application folder in `official/applications_user`.
+* Copy this application folder into `official/applications_user`.
 * Connect your Flipper via USB.
 * Build and install with: `./fbt launch_app APPSRC=protoview`.
 
@@ -168,6 +168,8 @@ The `ext` part means that we are in the SD card. So if you don't want
 to use the Android (or other) application to upload the file,
 you can just take out the SD card, insert it in your computer,
 copy the fine into `apps/Tools`, and that's it.
+
+* If you see the error "API version mismatch" when trying to launch the game, try installing the app from source.
 
 # Protocols decoders API
 
